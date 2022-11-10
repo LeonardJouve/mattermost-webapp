@@ -11,6 +11,7 @@ export type ModeType = 'danger' | 'warning' | 'info' | 'success';
 export type AlertBannerProps = {
     mode: ModeType;
     title?: React.ReactNode;
+    customIcon?: React.ReactNode;
     message?: React.ReactNode;
     children?: React.ReactNode;
     className?: string;
@@ -24,6 +25,7 @@ export type AlertBannerProps = {
 const AlertBanner = ({
     mode,
     title,
+    customIcon,
     message,
     className,
     variant = 'sys',
@@ -43,14 +45,16 @@ const AlertBanner = ({
     >
         {!hideIcon && (
             <div className='AlertBanner__icon'>
-                <i
-                    className={classNames({
-                        'icon-alert-outline':
+                {customIcon}
+                {!customIcon &&
+                    <i
+                        className={classNames({
+                            'icon-alert-outline':
                             mode === 'danger' || mode === 'warning',
-                        'icon-check': mode === 'success',
-                        'icon-alert-circle-outline': mode === 'info',
-                    })}
-                />
+                            'icon-check': mode === 'success',
+                            'icon-alert-circle-outline': mode === 'info',
+                        })}
+                    />}
             </div>
         )}
         <div className='AlertBanner__body'>
